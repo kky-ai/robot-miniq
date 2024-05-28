@@ -25,17 +25,21 @@ Motors motors(PWM1,PWM2,DIR1,DIR2);
 
 void setup() {
   motors.begin();
+
+  while (analogRead(6)>900); // Wait for a button press
 }
 
 void loop() {
   value = analogRead(5);
   
+  //PD Controller
   e = (value-SETPOINT);
   P = e*Kp;
   D = (e - last_e)*Kd;
   last_e = e;
   PD = P + D;
   
+  //Calculate speed of individial motors
   int speed1 = int(MAX_SPEED*(1+PD));
   int speed2 = int(MAX_SPEED*(1-PD));
 

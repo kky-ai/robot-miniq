@@ -29,6 +29,8 @@ Motors motors(PWM1,PWM2,DIR1,DIR2);
 void setup() {
   Serial.begin(9600);
   motors.begin();
+
+  while (analogRead(6)>900); // Wait for a button press
 }
 
 void loop() {
@@ -36,21 +38,25 @@ void loop() {
   uint32_t sensors_sum = 0;
   float PD, P, D, e;
 
+  //Read all the values and prepare a weighted sum
   for(int i=0; i<5; i++){
     value = analogRead(i);
     sensors_average += uint32_t(value * i) * MULTIPLIER;  
     sensors_sum += value;
   }
   
+  //PD Controller
   e = (int(sensors_average/sensors_sum)-SETPOINT);
   P = e*Kp;
   D = (e - last_e)*Kd;
   last_e = e;
   PD = P + D;
   
+  //Calculate speed of individial motors
   int speed1 = int(MAX_SPEED*(1+PD));
   int speed2 = int(MAX_SPEED*(1-PD));
 
+  //Stop if there is too much white
   if (sensors_sum < 3500){
     motors.drive(speed1, speed2);
   }
