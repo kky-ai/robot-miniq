@@ -13,15 +13,16 @@ The board has a power on toggle switch and is powered from 4xAA batteries.
 ## Peripherals
 | Peripheral | Pins | Description |
 | ---------- | ---- | ----------- |
-| 2x Motors  | 5, 6 - PWM; 7, 12 - Direction | Basic motor library included with examples. Direction held HIGH is backwards. |
+| 2x Motors  | 5, 6 - PWM; 7, 12 - Direction | Basic motor library included with examples; Direction held HIGH is backwards |
 | 2x Encoders | 0, 1 | Conveniently placed on INT2 and INT3 |
-| WS2812 RGB LED | 10 | Library widely available |
+| WS2812 RGB LED | 10 | Library widely available; Otherwise known as Neopixel |
 | 2x Photosensitive diodes | A5 | Two diodes connected in a voltage divider |
-| IR receiver | 17 | Library widely available, used for the bundled IR remote |
+| 5x Analog IR line sensor | A0-A4 | Included in the line_follower example |
+| IR receiver | 17 | Library widely available; Used for the bundled IR remote |
 | 2x IR LEDs | 8, 13 | Can be used for basic obstacle detection with the IR receiver |
 | 3x Buttons | A6 | Three buttons with LEDs connected through a voltage divider | 
-| I2C Compass | - | Can be accessed through I2C - Library widely available |
-| Buzzer | 16 | Connected through a transistor - can be controlled using PWM |
+| HMC5883 Compass | - | Can be accessed through I2C; Library widely available |
+| Buzzer | 16 | Connected through a transistor, can be controlled using PWM |
 
 If you need more information, you can look in the schematics, they are pretty well made.
 
